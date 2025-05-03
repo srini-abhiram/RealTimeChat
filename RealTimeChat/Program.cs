@@ -14,10 +14,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddUserSecrets<Program>();
 
 // Add services to the container.
+
+var keycloakAuthority = builder.Configuration["KEYCLOAK_AUTHORITY"]; //set user secret like https://your-keycloak-domain/realms/realmName
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
-        options.Authority = "https://keycloak.srinisprojects.online/realms/realtimechat";
+        options.Authority = keycloakAuthority;
         options.Audience = "realtimechat-api";
         options.RequireHttpsMetadata = true;
     });
