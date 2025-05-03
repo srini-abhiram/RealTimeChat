@@ -13,6 +13,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddUserSecrets<Program>();
 
 // Add services to the container.
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://keycloak.srinisprojects.online/realms/realtimechat";
+        options.Audience = "realtimechat-api";
+        options.RequireHttpsMetadata = false;
+    });
+builder.Services.AddAuthorization();
 builder.Services.AddDbContext<ChatDbContext.Models.ChatContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL")));
 builder.Services.AddSerilog();
 builder.Services.AddControllers();

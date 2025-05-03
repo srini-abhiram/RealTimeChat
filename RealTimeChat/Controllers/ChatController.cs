@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ChatDbContext.Models;
 using Serilog;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RealTimeChat.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ChatController : ControllerBase
