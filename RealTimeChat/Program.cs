@@ -18,7 +18,7 @@ builder.Services.AddAuthentication("Bearer")
     {
         options.Authority = "https://keycloak.srinisprojects.online/realms/realtimechat";
         options.Audience = "realtimechat-api";
-        options.RequireHttpsMetadata = false;
+        options.RequireHttpsMetadata = true;
     });
 builder.Services.AddAuthorization();
 builder.Services.AddDbContext<ChatDbContext.Models.ChatContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL")));
